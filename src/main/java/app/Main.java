@@ -1,6 +1,8 @@
 package app;
 
 //import app.entities.Champion;
+import app.entities.Champion;
+import app.entities.ErrorMsg;
 import app.services.ChampionService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -34,7 +36,14 @@ public class Main {
 
         app.get("/champions/{id}", ctx -> {
             int id = Integer.parseInt(ctx.pathParam("id"));
-            ctx.json(championService.getChampionById(id));
+
+            Champion championmatch = championService.getChampionById(id);
+            if (championmatch == null) {
+                ctx.status(404);
+                ctx.json(new ErrorMsg(404, "No content found for this request"));
+                return;
+            }
+            ctx.json(championmatch);
         });
 /*
         app.post("/champions", ctx -> {
