@@ -25,7 +25,7 @@ public class ChampionService {
 
     public Champion getChampionById(int id){
         for (Champion champion : championsList) {
-            if (champion.getChampionID() == id) {
+            if (champion.getId() == id) {
                 return champion;
             }
         }
