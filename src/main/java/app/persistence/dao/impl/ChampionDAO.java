@@ -4,6 +4,7 @@ import app.persistence.dto.ChampionDTO;
 
 import app.entities.Champion;
 import app.persistence.dao.IDAO;
+import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -50,7 +51,13 @@ public class ChampionDAO implements IDAO<ChampionDTO> {
 
     @Override
     public Optional<ChampionDTO> findById(int id) {
-        return Optional.empty();
+        try (EntityManager em = emf.createEntityManager()){
+            Champion champion = em.find(Champion.class, id);
+            if (champion != null){
+                return Optional.of(new ChampionDTO(champion));
+            }
+            return Optional.empty();
+        }
     }
 
     @Override
