@@ -31,12 +31,12 @@ public class Main {
         app.get("/champions", ctx -> {
             ctx.json(championService.getAllChampions());
         });
-/*
+
         app.get("/champions/{id}", ctx -> {
-            Long id = Long.parseLong(ctx.pathParam("id"));
+            int id = Integer.parseInt(ctx.pathParam("id"));
             ctx.json(championService.getChampionById(id));
         });
-
+/*
         app.post("/champions", ctx -> {
             Champion champion = ctx.bodyAsClass(Champion.class);
             ctx.json(championService.createChampion(champion));

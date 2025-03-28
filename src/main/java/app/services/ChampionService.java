@@ -6,14 +6,29 @@ import java.util.List;
 import app.entities.Champion;
 import lombok.*;
 
-@Data
-public class ChampionService {
 
+public class ChampionService {
+    ArrayList<Champion> championsList = new ArrayList<>();
+
+    public ChampionService() {
+        Champion champion1 = new Champion(1, "Fiddlesticks", "scary guy");
+        Champion champion2 = new Champion(2, "Amumu", "sad guy");
+        championsList.add(champion1);
+        championsList.add(champion2);
+    }
 
     public  List<Champion> getAllChampions(){
-        ArrayList<Champion> championsList = new ArrayList<>();
-        Champion champion1 = new Champion(1, "Fiddlesticks", "scary guy");
-        championsList.add(champion1);
+
+
         return championsList;
+    }
+
+    public Champion getChampionById(int id){
+        for (Champion champion : championsList) {
+            if (champion.getChampionID() == id) {
+                return champion;
+            }
+        }
+        return null;
     }
 }
