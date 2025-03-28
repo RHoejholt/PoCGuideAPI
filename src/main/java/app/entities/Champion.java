@@ -1,23 +1,13 @@
 package app.entities;
 
-import lombok.Getter;
+import lombok.*;
 
+@Data
+@AllArgsConstructor
 public class Champion {
 
-    @Getter
-    int championID;
-    String championName;
-    @Getter
+    int id;
+    String name;
     String description;
-
-    public Champion(int championID, String championName, String description) {
-        this.championID = championID;
-        this.championName = championName;
-        this.description = description;
-    }
-
-    public String getName() {
-        return championName;
-    }
 
 }
