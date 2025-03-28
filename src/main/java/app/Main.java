@@ -4,7 +4,7 @@ import app.persistence.dto.ChampionDTO;
 import app.persistence.dao.impl.ChampionDAO;
 import app.entities.Champion;
 import app.entities.ErrorMsg;
-import app.services.ChampionService;
+import app.controllers.ChampionController;
 import io.javalin.Javalin;
 import jakarta.persistence.*;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
         Javalin app = Javalin.create().start(7000);
-        ChampionService cs = new ChampionService();
+        ChampionController cs = new ChampionController();
         ChampionDAO championDAO = new ChampionDAO(emf.createEntityManager());
         /*
         VoteService voteService = new VoteService();
@@ -24,9 +24,7 @@ public class Main {
 
         app.get("/hello", ctx -> ctx.result("Hello World"));
 
-        app.get("/champions", ctx -> {
-            ctx.json(cs.getAllChampions());
-        });
+        app.get("/champions", cs::getAllChampions2);
 
         app.get("/champions/{id}", ctx -> {
             int id = Integer.parseInt(ctx.pathParam("id"));
@@ -56,7 +54,7 @@ public class Main {
  */
     }
 
-    private static void populateDataBase(ChampionService cs, ChampionDAO championDAO) throws IOException, InterruptedException {
+    private static void populateDataBase(ChampionController cs, ChampionDAO championDAO) throws IOException, InterruptedException {
         ChampionDTO champion1 = new ChampionDTO(1, "Fiddlesticks", "scary guy");
         ChampionDTO champion2 = new ChampionDTO(2, "Amumu", "sad guy");
         championDAO.save(champion1);
