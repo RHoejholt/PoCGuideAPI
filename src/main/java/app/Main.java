@@ -1,43 +1,37 @@
 package app;
-
-//import app.entities.Champion;
+import app.config.HibernateConfig;
+import app.persistence.dto.ChampionDTO;
+import app.persistence.dao.impl.ChampionDAO;
 import app.entities.Champion;
 import app.entities.ErrorMsg;
 import app.services.ChampionService;
 import io.javalin.Javalin;
-import io.javalin.http.Context;
-import io.javalin.http.Handler;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
-
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
         Javalin app = Javalin.create().start(7000);
-        ChampionService championService = new ChampionService();
+        ChampionService cs = new ChampionService();
+        ChampionDAO championDAO = new ChampionDAO(emf.createEntityManager());
         /*
         VoteService voteService = new VoteService();
 
      */
 
+        populateDataBase(cs, championDAO);
+
         app.get("/hello", ctx -> ctx.result("Hello World"));
 
         app.get("/champions", ctx -> {
-            ctx.json(championService.getAllChampions());
+            ctx.json(cs.getAllChampions());
         });
 
         app.get("/champions/{id}", ctx -> {
             int id = Integer.parseInt(ctx.pathParam("id"));
 
-            Champion championmatch = championService.getChampionById(id);
+            Champion championmatch = cs.getChampionById(id);
             if (championmatch == null) {
                 ctx.status(404);
                 ctx.json(new ErrorMsg(404, "No content found for this request"));
@@ -45,6 +39,9 @@ public class Main {
             }
             ctx.json(championmatch);
         });
+
+
+
 /*
         app.post("/champions", ctx -> {
             Champion champion = ctx.bodyAsClass(Champion.class);
@@ -57,5 +54,13 @@ public class Main {
         });
 
  */
+    }
+
+    private static void populateDataBase(ChampionService cs, ChampionDAO championDAO) throws IOException, InterruptedException {
+        ChampionDTO champion1 = new ChampionDTO(1, "Fiddlesticks", "scary guy");
+        ChampionDTO champion2 = new ChampionDTO(2, "Amumu", "sad guy");
+        championDAO.save(champion1);
+        championDAO.save(champion2);
+
     }
 }
