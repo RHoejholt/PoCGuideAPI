@@ -1,5 +1,6 @@
 package app.entities;
 
+import app.persistence.dto.ChampionDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,5 +15,11 @@ public class Champion {
     int id;
     String name;
     String description;
+
+    public Champion(ChampionDTO championDTO) {
+        this.id = championDTO.getId();
+        this.name = championDTO.getName();
+        this.description = championDTO.getDescription();
+    }
 
 }

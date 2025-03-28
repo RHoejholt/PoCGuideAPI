@@ -12,15 +12,9 @@ public class Main {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
         Javalin app = Javalin.create().start(7000);
         ChampionController championController = new ChampionController();
-        ChampionDAO championDAO = new ChampionDAO(emf.createEntityManager());
-
+        ChampionDAO championDAO = ChampionDAO.getInstance(emf);
         populateDataBase(championController, championDAO);
-
         addRoutes(app, championController);
-
-
-
-
     }
 
     private static void addRoutes(Javalin app, ChampionController championController) {
@@ -45,8 +39,8 @@ public class Main {
     }
 
     private static void populateDataBase(ChampionController cs, ChampionDAO championDAO) throws IOException, InterruptedException {
-        ChampionDTO champion1 = new ChampionDTO(1, "Fiddlesticks", "scary guy");
-        ChampionDTO champion2 = new ChampionDTO(2, "Amumu", "sad guy");
+        ChampionDTO champion1 = new ChampionDTO("Fiddlesticks", "scary guy");
+        ChampionDTO champion2 = new ChampionDTO("Amumu", "sad guy");
         championDAO.save(champion1);
         championDAO.save(champion2);
 
