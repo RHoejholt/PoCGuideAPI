@@ -2,8 +2,6 @@ package app;
 import app.config.HibernateConfig;
 import app.persistence.dto.ChampionDTO;
 import app.persistence.dao.impl.ChampionDAO;
-import app.entities.Champion;
-import app.entities.ErrorMsg;
 import app.controllers.ChampionController;
 import io.javalin.Javalin;
 import jakarta.persistence.*;
@@ -13,34 +11,26 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
         Javalin app = Javalin.create().start(7000);
-        ChampionController cs = new ChampionController();
+        ChampionController championController = new ChampionController();
         ChampionDAO championDAO = new ChampionDAO(emf.createEntityManager());
-        /*
-        VoteService voteService = new VoteService();
 
-     */
+        populateDataBase(championController, championDAO);
 
-        populateDataBase(cs, championDAO);
+        addRoutes(app, championController);
 
+
+
+
+    }
+
+    private static void addRoutes(Javalin app, ChampionController championController) {
         app.get("/hello", ctx -> ctx.result("Hello World"));
 
-        app.get("/champions", cs::getAllChampions2);
+        app.get("/champions", championController::getAllChampions);
 
-        app.get("/champions/{id}", ctx -> {
-            int id = Integer.parseInt(ctx.pathParam("id"));
+        app.get("/champions/{id}", championController::getChampionById);
 
-            Champion championmatch = cs.getChampionById(id);
-            if (championmatch == null) {
-                ctx.status(404);
-                ctx.json(new ErrorMsg(404, "No content found for this request"));
-                return;
-            }
-            ctx.json(championmatch);
-        });
-
-
-
-/*
+        /*
         app.post("/champions", ctx -> {
             Champion champion = ctx.bodyAsClass(Champion.class);
             ctx.json(championService.createChampion(champion));

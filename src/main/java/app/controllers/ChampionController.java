@@ -1,9 +1,9 @@
 package app.controllers;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import app.entities.Champion;
+import app.entities.ErrorMsg;
 import io.javalin.http.Context;
 
 
@@ -17,23 +17,21 @@ public class ChampionController {
         championsList.add(champion2);
     }
 
-    public  List<Champion> getAllChampions(){
-
-
-        return championsList;
+    public void getAllChampions(Context ctx) {
+        ctx.json(championsList);
     }
 
-    public void getAllChampions2(Context ctx){
-    ctx.json(championsList);
+    public void getChampionById(Context ctx) {
 
-    }
-
-    public Champion getChampionById(int id){
-        for (Champion champion : championsList) {
-            if (champion.getId() == id) {
-                return champion;
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        for (Champion championSearch : championsList) {
+            if (championSearch.getId() == id) {
+                ctx.json(championSearch);
+                return;
             }
         }
-        return null;
+
+        ctx.status(404);
+        ctx.json(new ErrorMsg(404, "No content found for this request"));
     }
 }
