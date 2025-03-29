@@ -1,5 +1,7 @@
 package app.persistence.dto;
 
+import app.entities.Champion;
+import app.entities.Item;
 import app.entities.Vote;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -13,20 +15,20 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VoteDTO {
     private int id;
-    private int championId;
-    private int itemId;
+    private Champion champion;
+    private Item item;
     private int rating;
 
     public VoteDTO(Vote vote) {
         this.id = vote.getId();
-        this.championId = vote.getChampionId();
-        this.itemId = vote.getItemId();
+        this.champion = vote.getChampion();
+        this.item = vote.getItem();
         this.rating = vote.getRating();
     }
 
-    public VoteDTO(int championId, int itemId, int rating) {
-        this.championId = championId;
-        this.itemId = itemId;
+    public VoteDTO(Champion champion, Item item, int rating) {
+        this.champion = champion;
+        this.item = item;
         this.rating = rating;
     }
 

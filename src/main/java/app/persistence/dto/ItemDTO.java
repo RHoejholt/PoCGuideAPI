@@ -35,6 +35,13 @@ public class ItemDTO {
 
     }
 
+    public ItemDTO(Item item, double averageRating) {
+        this.id = item.getId();
+        this.name = item.getName();
+        this.description = item.getDescription();
+        this.averageRating = averageRating;
+    }
+
     public static List<ItemDTO> toDTOList(List<Item> items){
         return items.stream().map(ItemDTO::new).toList();
     }

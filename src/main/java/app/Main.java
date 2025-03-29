@@ -1,6 +1,8 @@
 package app;
 import app.config.HibernateConfig;
 import app.controllers.VoteController;
+import app.entities.Champion;
+import app.entities.Item;
 import app.persistence.dao.impl.ItemDAO;
 import app.persistence.dao.impl.VoteDAO;
 import app.persistence.dto.ChampionDTO;
@@ -41,19 +43,63 @@ public class Main {
     }
 
     private static void populateDataBase(ChampionController cs, ChampionDAO championDAO, ItemDAO itemDAO, VoteDAO voteDAO) throws IOException, InterruptedException {
-        ChampionDTO champion1 = new ChampionDTO("Fiddlesticks", "scary guy");
-        ChampionDTO champion2 = new ChampionDTO("Amumu", "sad guy");
-        championDAO.save(champion1);
-        championDAO.save(champion2);
+        ChampionDTO championDTO1 = new ChampionDTO("Fiddlesticks", "scary guy");
+        ChampionDTO championDTO2 = new ChampionDTO("Amumu", "sad guy");
+        championDAO.save(championDTO1);
+        championDAO.save(championDTO2);
 
-        ItemDTO item1 = new ItemDTO("Trinity Force", "tons of damage", 3.333);
-        ItemDTO item2 = new ItemDTO("Infinity edge", "tons of edging", 5);
-        itemDAO.save(item1);
-        itemDAO.save(item2);
+        ItemDTO itemDTO1 = new ItemDTO("Trinity Force", "tons of damage", 3.333);
+        ItemDTO itemDTO2 = new ItemDTO("Infinity edge", "tons of edging", 5);
+        itemDAO.save(itemDTO1);
+        itemDAO.save(itemDTO2);
 
-        VoteDTO vote1 = new VoteDTO(1, 2, 5);
-        VoteDTO vote2 = new VoteDTO(2, 1, 2);
+
+        Champion champion1 = new Champion(championDTO1);
+        Champion champion2 = new Champion(championDTO2);
+        Item item1 = new Item(itemDTO1);
+        Item item2 = new Item(itemDTO2);
+
+        VoteDTO vote1 = new VoteDTO(champion1, item2, 5);
+        VoteDTO vote2 = new VoteDTO(champion2, item1, 2);
+        VoteDTO vote3 = new VoteDTO(champion1, item1, 3);
+        VoteDTO vote4 = new VoteDTO(champion2, item2, 4);
+        VoteDTO vote5 = new VoteDTO(champion1, item1, 1);
+        VoteDTO vote6 = new VoteDTO(champion1, item2, 5);
+        VoteDTO vote7 = new VoteDTO(champion2, item1, 4);
+        VoteDTO vote8 = new VoteDTO(champion2, item2, 3);
+        VoteDTO vote9 = new VoteDTO(champion1, item1, 2);
+        VoteDTO vote10 = new VoteDTO(champion1, item2, 4);
+        VoteDTO vote11 = new VoteDTO(champion2, item1, 5);
+        VoteDTO vote12 = new VoteDTO(champion2, item2, 1);
+        VoteDTO vote13 = new VoteDTO(champion1, item1, 3);
+        VoteDTO vote14 = new VoteDTO(champion1, item2, 4);
+        VoteDTO vote15 = new VoteDTO(champion2, item1, 2);
+        VoteDTO vote16 = new VoteDTO(champion2, item2, 5);
+        VoteDTO vote17 = new VoteDTO(champion1, item1, 4);
+        VoteDTO vote18 = new VoteDTO(champion1, item2, 1);
+        VoteDTO vote19 = new VoteDTO(champion2, item1, 3);
+        VoteDTO vote20 = new VoteDTO(champion2, item2, 2);
+
         voteDAO.save(vote1);
         voteDAO.save(vote2);
+        voteDAO.save(vote3);
+        voteDAO.save(vote4);
+        voteDAO.save(vote5);
+        voteDAO.save(vote6);
+        voteDAO.save(vote7);
+        voteDAO.save(vote8);
+        voteDAO.save(vote9);
+        voteDAO.save(vote10);
+        voteDAO.save(vote11);
+        voteDAO.save(vote12);
+        voteDAO.save(vote13);
+        voteDAO.save(vote14);
+        voteDAO.save(vote15);
+        voteDAO.save(vote16);
+        voteDAO.save(vote17);
+        voteDAO.save(vote18);
+        voteDAO.save(vote19);
+        voteDAO.save(vote20);
+
     }
 }

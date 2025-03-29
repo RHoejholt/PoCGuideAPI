@@ -20,4 +20,8 @@ public class ItemController {
     public void getAllItems(Context ctx) {
         ctx.json(itemDAO.getItems());
     }
+
+    public void getAllItemsForChampion(Context ctx, int championId) {
+        ctx.json(itemDAO.getItemsForChampion(championId));
+    }
 }

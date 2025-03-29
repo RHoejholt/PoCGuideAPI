@@ -11,10 +11,12 @@ import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class ItemDAO implements IDAO<ItemDTO> {
     private static ItemDAO instance;
+    private static VoteDAO voteDAO;
     private static EntityManagerFactory emf;
 
     private ItemDAO() {
@@ -40,12 +42,25 @@ public class ItemDAO implements IDAO<ItemDTO> {
     }
 
     public List<ItemDTO> getItems() {
-        List<Item> itemList = new ArrayList<>();
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Item> query = em.createQuery("SELECT i FROM Item i", Item.class);
             return ItemDTO.toDTOList(query.getResultList());
         }
     }
+
+
+
+    public List<ItemDTO> getItemsForChampion(int championId) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Item> query = em.createQuery("SELECT i FROM Item i", Item.class);
+            List<Item> itemList = query.getResultList(); // Retrieve all items
+
+            return itemList.stream()
+                    .map(i -> new ItemDTO(i, voteDAO.getAverageRatingForItemAndChampion(i.getId(), championId)))
+                    .collect(Collectors.toList());
+        }
+    }
+
 
 
     @Override
@@ -65,8 +80,8 @@ public class ItemDAO implements IDAO<ItemDTO> {
 
     @Override
     public void delete(int id) {
-
     }
+
 /*
     @Override
     public Optional<ChampionDTO> findById(int id) {

@@ -86,4 +86,18 @@ public class VoteDAO implements IDAO<VoteDTO> {
             em.getTransaction().commit();
         }
     }
+
+    public double getAverageRatingForItemAndChampion(int itemId, int championId) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Double> query = em.createQuery(
+                    "SELECT COALESCE(AVG(v.rating), 0) FROM Vote v WHERE v.item.id = :itemId AND v.champion.id = :championId",
+                    Double.class
+            );
+            query.setParameter("itemId", itemId);
+            query.setParameter("championId", championId);
+            return query.getSingleResult();
+        }
+    }
+
+
 }
