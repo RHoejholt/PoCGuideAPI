@@ -8,6 +8,7 @@ import app.persistence.dao.impl.ChampionDAO;
 import app.controllers.ChampionController;
 import app.controllers.ItemController;
 import app.persistence.dto.ItemDTO;
+import app.persistence.dto.VoteDTO;
 import io.javalin.Javalin;
 import jakarta.persistence.*;
 import java.io.IOException;
@@ -49,5 +50,10 @@ public class Main {
         ItemDTO item2 = new ItemDTO("Infinity edge", "tons of edging", 5);
         itemDAO.save(item1);
         itemDAO.save(item2);
+
+        VoteDTO vote1 = new VoteDTO(1, 2, 5);
+        VoteDTO vote2 = new VoteDTO(2, 1, 2);
+        voteDAO.save(vote1);
+        voteDAO.save(vote2);
     }
 }

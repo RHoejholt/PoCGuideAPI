@@ -24,6 +24,12 @@ public class VoteDTO {
         this.rating = vote.getRating();
     }
 
+    public VoteDTO(int championId, int itemId, int rating) {
+        this.championId = championId;
+        this.itemId = itemId;
+        this.rating = rating;
+    }
+
     public static List<VoteDTO> toDTOList(List<Vote> votes) {
         return votes.stream().map(VoteDTO::new).toList();
     }

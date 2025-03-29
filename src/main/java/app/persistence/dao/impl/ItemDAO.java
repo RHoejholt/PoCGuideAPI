@@ -1,12 +1,9 @@
 package app.persistence.dao.impl;
 
 import app.entities.Item;
-import app.persistence.dto.ChampionDTO;
 
-import app.entities.Champion;
 import app.persistence.dao.IDAO;
 import app.persistence.dto.ItemDTO;
-import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -14,7 +11,6 @@ import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 public class ItemDAO implements IDAO<ItemDTO> {
