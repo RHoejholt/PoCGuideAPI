@@ -2,9 +2,12 @@ package app.config;
 
 //import app.entities.Point;
 import app.entities.Champion;
+import app.entities.Item;
+import app.entities.Vote;
 import app.utils.Utils;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.eclipse.jetty.server.Authentication;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -41,6 +44,8 @@ public class HibernateConfig {
 
     private static void getAnnotationConfiguration(Configuration configuration) {
         configuration.addAnnotatedClass(Champion.class);
+        configuration.addAnnotatedClass(Item.class);
+        configuration.addAnnotatedClass(Vote.class);
     }
 
     private static EntityManagerFactory createEMF(boolean forTest) {

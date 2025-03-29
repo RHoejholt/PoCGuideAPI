@@ -31,7 +31,7 @@ public class ChampionDTO {
     private String name;
     private String description;
 
-    public static List<ChampionDTO> toDTOList(List<Champion> poems){
-        return poems.stream().map(ChampionDTO::new).toList();
+    public static List<ChampionDTO> toDTOList(List<Champion> champions){
+        return champions.stream().map(ChampionDTO::new).toList();
     }
 }
