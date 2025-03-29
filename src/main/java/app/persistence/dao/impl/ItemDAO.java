@@ -31,18 +31,18 @@ public class ItemDAO implements IDAO<ItemDTO> {
         }
         return instance;
     }
-/*
+
     @Override
-    public ChampionDTO save(ChampionDTO championDTO) {
-        Champion champion = new Champion(championDTO);
+    public ItemDTO save(ItemDTO itemDTO) {
+        Item item = new Item(itemDTO);
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            em.persist(champion);
+            em.persist(item);
             em.getTransaction().commit();
         }
-        return new ChampionDTO(champion);
+        return new ItemDTO(item);
     }
-*/
+
     public List<ItemDTO> getItems() {
         List<Item> itemList = new ArrayList<>();
         try (EntityManager em = emf.createEntityManager()) {
@@ -51,10 +51,6 @@ public class ItemDAO implements IDAO<ItemDTO> {
         }
     }
 
-    @Override
-    public ItemDTO save(ItemDTO dto) {
-        return null;
-    }
 
     @Override
     public Optional<ItemDTO> findById(int id) {
