@@ -2,6 +2,7 @@ package app.persistence.dao.impl;
 import app.entities.Item;
 import app.persistence.dao.IDAO;
 import app.persistence.dto.ItemDTO;
+import io.javalin.http.NotFoundResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -79,14 +80,45 @@ public class ItemDAO implements IDAO<ItemDTO> {
         return List.of();
     }
 
-    @Override
     public ItemDTO update(ItemDTO dto) {
-        return null;
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Item item = em.find(Item.class, dto.getId());
+
+            if (item != null) {
+                item.setName(dto.getName());
+                item.setDescription(dto.getDescription());
+
+                em.merge(item);
+                em.getTransaction().commit();
+
+                return new ItemDTO(item);
+            }
+
+            return null;
+        }
     }
 
-    @Override
-    public void delete(int id) {
-    }
+        @Override
+        public void delete(int id) {
+            try (EntityManager em = emf.createEntityManager()) {
+                em.getTransaction().begin();
+
+                // Retrieve the existing Item entity from the database
+                Item item = em.find(Item.class, id);
+
+                // If the item exists, remove it from the database
+                if (item != null) {
+                    em.remove(item);
+                    em.getTransaction().commit();
+                } else {
+                    // Handle the case where the item was not found (e.g., throw an exception)
+                    throw new NotFoundResponse("Item not found");
+                }
+            }
+        }
+
 
 /*
     @Override

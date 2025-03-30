@@ -1,5 +1,6 @@
 package app;
 import app.config.HibernateConfig;
+import app.controllers.AdminController;
 import app.controllers.VoteController;
 import app.entities.Champion;
 import app.entities.Item;
@@ -18,17 +19,22 @@ public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
         Javalin app = Javalin.create().start(7000);
+
         ChampionController championController = new ChampionController();
         ChampionDAO championDAO = ChampionDAO.getInstance(emf);
         ItemController itemController = new ItemController();
         ItemDAO itemDAO = ItemDAO.getInstance(emf);
         VoteController voteController = new VoteController();
         VoteDAO voteDAO = VoteDAO.getInstance(emf);
+        AdminController adminController = new AdminController();
+
+
+
         populateDataBase(championDAO, itemDAO, voteDAO);
-        addRoutes(app, championController, itemController, voteController);
+        addRoutes(app, championController, itemController, voteController, adminController);
     }
 
-    private static void addRoutes(Javalin app, ChampionController championController, ItemController itemController, VoteController voteController) {
+    private static void addRoutes(Javalin app, ChampionController championController, ItemController itemController, VoteController voteController, AdminController adminController) {
         app.get("/hello", ctx -> ctx.result("Hello World"));
 
         app.get("/champions", championController::getAllChampions);
@@ -38,6 +44,10 @@ public class Main {
         app.get("/items", itemController::getAllItems);
 
         app.post("/votes", voteController::submitVote);
+
+        app.post("/admin/signup", adminController::signUp);
+
+
 
     }
 

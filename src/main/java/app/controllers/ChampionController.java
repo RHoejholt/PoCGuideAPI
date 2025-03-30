@@ -2,12 +2,14 @@ package app.controllers;
 import java.util.*;
 import app.config.HibernateConfig;
 import app.entities.ErrorMsg;
+import app.middleware.AdminAuthMiddleware;
 import app.persistence.dao.impl.ChampionDAO;
 import app.persistence.dao.impl.ItemDAO;
 import app.persistence.dao.impl.VoteDAO;
 import app.persistence.dto.ChampionDTO;
 import app.persistence.dto.ItemDTO;
 import io.javalin.http.Context;
+import io.javalin.http.NotFoundResponse;
 import jakarta.persistence.EntityManagerFactory;
 
 public class ChampionController {
@@ -65,6 +67,32 @@ public class ChampionController {
     }
 
 
+    public void createChampion(Context ctx) throws Exception {
+        new AdminAuthMiddleware().handle(ctx); // Protect endpoint
+        ChampionDTO champion = ctx.bodyAsClass(ChampionDTO.class);
+        championDAO.save(champion);
+        ctx.status(201).json("Champion added");
+    }
+
+    public void updateChampion(Context ctx) throws Exception {
+        new AdminAuthMiddleware().handle(ctx);
+        int id = Integer.parseInt(ctx.pathParam("championId"));
+        ChampionDTO champion = ctx.bodyAsClass(ChampionDTO.class);
+        champion.setId(id);
+        ChampionDTO updatedChampion = championDAO.update(champion);
+        if (updatedChampion != null) {
+            ctx.json("Champion updated");
+        } else {
+            ctx.status(404).json("Champion update failed");
+        }
+    }
+
+    public void deleteChampion(Context ctx) throws Exception {
+        new AdminAuthMiddleware().handle(ctx);
+        int id = Integer.parseInt(ctx.pathParam("championId"));
+        championDAO.delete(id);
+        ctx.json("Champion deleted");
+    }
 }
 
 

@@ -67,66 +67,30 @@ public class ChampionDAO implements IDAO<ChampionDTO> {
 
     @Override
     public ChampionDTO update(ChampionDTO dto) {
-        return null;
-    }
-
-    @Override
-    public void delete(int id) {
-
-    }
-
-
-    /*
-    @Override
-    public Optional<MovieDTO> findById(long id) {
-        return Optional.ofNullable(em.find(Movie.class, id))
-                .map(movie -> {
-                    MovieDTO dto = new MovieDTO();
-                    dto.setTitle(movie.getTitle());
-                    dto.setVote_average(movie.getVote_average());
-                    dto.setId(id);
-                    dto.setOverview(movie.getOverview());
-                    dto.setRelease_date(movie.getRelease_date());
-                    return dto;
-                });
-    }
-
-    @Override
-    public List<MovieDTO> findAll() {
-        return em.createQuery("SELECT m FROM Movie m", Movie.class)
-                .getResultList()
-                .stream()
-                .map(movie -> {
-                    MovieDTO dto = new MovieDTO();
-                    dto.setTitle(movie.getTitle());
-                    dto.setVote_average(movie.getVote_average());
-                    dto.setOverview(movie.getOverview());
-                    dto.setRelease_date(movie.getRelease_date());
-                    dto.setId(movie.getId());
-                    return dto;
-                })
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public MovieDTO update(MovieDTO dto) {
-        Movie movie = em.find(Movie.class, dto.getId());
-        if (movie != null) {
-            movie.setTitle(dto.getTitle());
+        try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            em.merge(movie);
-            em.getTransaction().commit();
-            return dto;
+            Champion champion = em.find(Champion.class, dto.getId());
+            if (champion != null) {
+                champion.setName(dto.getName());
+                champion.setDescription(dto.getDescription());
+                em.merge(champion);
+                em.getTransaction().commit();
+                return new ChampionDTO(champion);
+            }
+            return null;
         }
-        return null;
     }
+
 
     @Override
     public void delete(int id) {
-        em.getTransaction().begin();
-        Optional.ofNullable(em.find(Movie.class, id)).ifPresent(em::remove);
-        em.getTransaction().commit();
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            Champion champion = em.find(Champion.class, id);
+            if (champion != null) {
+                em.remove(champion); // Remove the Champion entity from the database
+                em.getTransaction().commit();
+            }
+        }
     }
-    */
-
 }
