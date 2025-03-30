@@ -1,22 +1,16 @@
 package app.persistence.dao.impl;
-
 import app.entities.Item;
-
 import app.persistence.dao.IDAO;
 import app.persistence.dto.ItemDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 public class ItemDAO implements IDAO<ItemDTO> {
     private static ItemDAO instance;
-    private static VoteDAO voteDAO;
     private static EntityManagerFactory emf;
 
     private ItemDAO() {
@@ -43,14 +37,18 @@ public class ItemDAO implements IDAO<ItemDTO> {
 
     public List<ItemDTO> getItems() {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Item> query = em.createQuery("SELECT i FROM Item i", Item.class);
-            return ItemDTO.toDTOList(query.getResultList());
+            TypedQuery<ItemDTO> query = em.createQuery(
+                    "SELECT new app.persistence.dto.ItemDTO(i.id, i.name, i.description) FROM Item i",
+                    ItemDTO.class
+            );
+            return query.getResultList();
         }
     }
 
 
 
-    public List<ItemDTO> getItemsForChampion(int championId) {
+
+    public List<ItemDTO> getItemsForChampion(VoteDAO voteDAO, int championId) {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Item> query = em.createQuery("SELECT i FROM Item i", Item.class);
             List<Item> itemList = query.getResultList(); // Retrieve all items
@@ -65,7 +63,13 @@ public class ItemDAO implements IDAO<ItemDTO> {
 
     @Override
     public Optional<ItemDTO> findById(int id) {
-        return Optional.empty();
+        try (EntityManager em = emf.createEntityManager()){
+            Item item = em.find(Item.class, id);
+            if (item != null){
+                return Optional.of(new ItemDTO(item));
+            }
+            return Optional.empty();
+        }
     }
 
     @Override

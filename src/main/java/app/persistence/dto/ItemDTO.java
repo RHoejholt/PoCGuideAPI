@@ -1,14 +1,9 @@
 package app.persistence.dto;
-import app.entities.Champion;
 import app.entities.Item;
-import app.persistence.dao.impl.ItemDAO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-
-import java.util.Date;
 import java.util.List;
-
 
 @Getter
 @Setter
@@ -19,6 +14,7 @@ public class ItemDTO {
     private int id;
     private String name;
     private String description;
+    @JsonIgnore
     private double averageRating;
 
     public ItemDTO(Item item){
@@ -28,10 +24,16 @@ public class ItemDTO {
         this.averageRating = averageRating;
     }
 
-    public ItemDTO(String name, String description, double averageRating){
+    public ItemDTO(String name, String description){
         this.name= name;
         this.description = description;
-        this.averageRating = averageRating;
+
+    }
+
+    public ItemDTO(int id, String name, String description){
+        this.id = id;
+        this.name= name;
+        this.description = description;
 
     }
 

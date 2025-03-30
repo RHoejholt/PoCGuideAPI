@@ -34,7 +34,7 @@ public class Main {
 
         app.get("/champions", championController::getAllChampions);
 
-        app.get("/champions/{id}", championController::getChampionById);
+        app.get("/champions/{id}", championController::getChampionAndItemsById);
 
         app.get("/items", itemController::getAllItems);
 
@@ -48,16 +48,27 @@ public class Main {
         championDAO.save(championDTO1);
         championDAO.save(championDTO2);
 
-        ItemDTO itemDTO1 = new ItemDTO("Trinity Force", "tons of damage", 3.333);
-        ItemDTO itemDTO2 = new ItemDTO("Infinity edge", "tons of edging", 5);
+        ItemDTO itemDTO1 = new ItemDTO("Trinity Force", "tons of damage");
+        ItemDTO itemDTO2 = new ItemDTO("Infinity edge", "tons of edging");
         itemDAO.save(itemDTO1);
         itemDAO.save(itemDTO2);
 
 
-        Champion champion1 = new Champion(championDTO1);
-        Champion champion2 = new Champion(championDTO2);
-        Item item1 = new Item(itemDTO1);
-        Item item2 = new Item(itemDTO2);
+        Champion champion1 = championDAO.findById(1)
+                .map(Champion::new)
+                .orElseThrow(() -> new RuntimeException("Champion not found"));
+
+        Champion champion2 = championDAO.findById(2)
+                .map(Champion::new)
+                .orElseThrow(() -> new RuntimeException("Champion not found"));
+
+        Item item1 = itemDAO.findById(1)
+                .map(Item::new)
+                .orElseThrow(() -> new RuntimeException("Item not found"));
+
+        Item item2 = itemDAO.findById(2)
+                .map(Item::new)
+                .orElseThrow(() -> new RuntimeException("Item not found"));
 
         VoteDTO vote1 = new VoteDTO(champion1, item2, 5);
         VoteDTO vote2 = new VoteDTO(champion2, item1, 2);
