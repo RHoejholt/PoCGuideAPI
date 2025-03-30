@@ -1,6 +1,4 @@
 package app.entities;
-
-import app.persistence.dto.ChampionDTO;
 import app.persistence.dto.VoteDTO;
 import jakarta.persistence.*;
 import lombok.*;

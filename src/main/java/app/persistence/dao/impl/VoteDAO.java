@@ -70,6 +70,7 @@ public class VoteDAO implements IDAO<VoteDTO> {
             em.getTransaction().rollback();
             return null;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
             return null;
         }
@@ -95,7 +96,8 @@ public class VoteDAO implements IDAO<VoteDTO> {
             );
             query.setParameter("itemId", itemId);
             query.setParameter("championId", championId);
-            return query.getSingleResult();
+            Double result = query.getSingleResult();
+            return result != null ? result : 0;
         }
     }
 

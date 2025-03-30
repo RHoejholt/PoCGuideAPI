@@ -26,7 +26,9 @@ public class ItemDAO implements IDAO<ItemDTO> {
 
     @Override
     public ItemDTO save(ItemDTO itemDTO) {
-        Item item = new Item(itemDTO);
+        Item item = new Item();
+        item.setName(itemDTO.getName());
+        item.setDescription(itemDTO.getDescription());
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(item);

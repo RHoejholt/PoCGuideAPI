@@ -13,10 +13,9 @@ import app.persistence.dto.ItemDTO;
 import app.persistence.dto.VoteDTO;
 import io.javalin.Javalin;
 import jakarta.persistence.*;
-import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
         Javalin app = Javalin.create().start(7000);
         ChampionController championController = new ChampionController();
@@ -25,7 +24,7 @@ public class Main {
         ItemDAO itemDAO = ItemDAO.getInstance(emf);
         VoteController voteController = new VoteController();
         VoteDAO voteDAO = VoteDAO.getInstance(emf);
-        populateDataBase(championController, championDAO, itemDAO, voteDAO);
+        populateDataBase(championDAO, itemDAO, voteDAO);
         addRoutes(app, championController, itemController, voteController);
     }
 
@@ -42,7 +41,7 @@ public class Main {
 
     }
 
-    private static void populateDataBase(ChampionController cs, ChampionDAO championDAO, ItemDAO itemDAO, VoteDAO voteDAO) throws IOException, InterruptedException {
+    private static void populateDataBase(ChampionDAO championDAO, ItemDAO itemDAO, VoteDAO voteDAO) {
         ChampionDTO championDTO1 = new ChampionDTO("Fiddlesticks", "scary guy");
         ChampionDTO championDTO2 = new ChampionDTO("Amumu", "sad guy");
         championDAO.save(championDTO1);
@@ -91,6 +90,12 @@ public class Main {
         VoteDTO vote19 = new VoteDTO(champion2, item1, 3);
         VoteDTO vote20 = new VoteDTO(champion2, item2, 2);
 
+        saveVotes(voteDAO, vote1, vote2, vote3, vote4, vote5, vote6, vote7, vote8, vote9, vote10);
+        saveVotes(voteDAO, vote11, vote12, vote13, vote14, vote15, vote16, vote17, vote18, vote19, vote20);
+
+    }
+
+    private static void saveVotes(VoteDAO voteDAO, VoteDTO vote1, VoteDTO vote2, VoteDTO vote3, VoteDTO vote4, VoteDTO vote5, VoteDTO vote6, VoteDTO vote7, VoteDTO vote8, VoteDTO vote9, VoteDTO vote10) {
         voteDAO.save(vote1);
         voteDAO.save(vote2);
         voteDAO.save(vote3);
@@ -101,16 +106,5 @@ public class Main {
         voteDAO.save(vote8);
         voteDAO.save(vote9);
         voteDAO.save(vote10);
-        voteDAO.save(vote11);
-        voteDAO.save(vote12);
-        voteDAO.save(vote13);
-        voteDAO.save(vote14);
-        voteDAO.save(vote15);
-        voteDAO.save(vote16);
-        voteDAO.save(vote17);
-        voteDAO.save(vote18);
-        voteDAO.save(vote19);
-        voteDAO.save(vote20);
-
     }
 }
