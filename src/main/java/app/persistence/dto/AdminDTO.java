@@ -21,14 +21,12 @@ public class AdminDTO {
     private String email;
     private String username;
     private String password;
-    private String secretKey;
 
     public AdminDTO(Admin admin) {
         this.id = admin.getId();
         this.email = admin.getEmail();
         this.username = admin.getUsername();
         this.password = admin.getPassword();
-        this.secretKey = admin.getSecretKey();
     }
 
     public boolean validateSecretKey(SecretKeyDAO secretKeyDAO, String secretKeyFromRequest) {

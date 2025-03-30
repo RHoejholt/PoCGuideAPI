@@ -24,15 +24,11 @@ public class Admin {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String secretKey;
-
     public Admin(AdminDTO adminDTO) {
         this.id = adminDTO.getId();
         this.email = adminDTO.getEmail();
         this.username = adminDTO.getUsername();
         this.password = adminDTO.getPassword();
-        this.secretKey = adminDTO.getSecretKey();
     }
 
     public void setPasswordWithHashing(String plainPassword) {

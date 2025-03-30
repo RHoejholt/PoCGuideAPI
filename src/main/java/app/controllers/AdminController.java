@@ -15,7 +15,6 @@ public class AdminController {
     private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
     private final AdminDAO adminDAO = AdminDAO.getInstance(emf);
     private final SecretKeyDAO secretKeyDAO = SecretKeyDAO.getInstance(emf);
-    private static String SECRET_KEY = System.getenv("secret_key");
 
     public void signUp(Context ctx) {
         AdminDTO admin = ctx.bodyAsClass(AdminDTO.class);

@@ -17,7 +17,6 @@ public class SecretKey {
     @Column(nullable = false, unique = true)
     private String secretKey;
 
-    // Constructor, getters, setters, etc.
     public SecretKey() {}
 
     public SecretKey(String secretKey) {

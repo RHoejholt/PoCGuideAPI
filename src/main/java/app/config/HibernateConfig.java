@@ -1,9 +1,7 @@
 package app.config;
 
 //import app.entities.Point;
-import app.entities.Champion;
-import app.entities.Item;
-import app.entities.Vote;
+import app.entities.*;
 import app.utils.Utils;
 
 import jakarta.persistence.EntityManagerFactory;
@@ -46,6 +44,8 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Champion.class);
         configuration.addAnnotatedClass(Item.class);
         configuration.addAnnotatedClass(Vote.class);
+        configuration.addAnnotatedClass(Admin.class);
+        configuration.addAnnotatedClass(SecretKey.class);
     }
 
     private static EntityManagerFactory createEMF(boolean forTest) {
