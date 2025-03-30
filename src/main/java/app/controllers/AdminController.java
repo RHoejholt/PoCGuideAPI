@@ -23,7 +23,8 @@ public class AdminController {
         if (secretKeyFromRequest == null || !admin.validateSecretKey(secretKeyDAO, secretKeyFromRequest)) {
             throw new UnauthorizedResponse("Invalid or expired secret key");
         }
-
+        String hashedPassword = BCrypt.hashpw(admin.getPassword(), BCrypt.gensalt(12));
+        admin.setPassword(hashedPassword);
         adminDAO.save(admin);
         ctx.status(201).json("Admin registered successfully");
     }

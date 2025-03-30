@@ -47,7 +47,7 @@ public class Main {
 
         app.post("/admin/signup", adminController::signUp);
 
-
+        app.post("/admin/login", adminController::login);
 
     }
 
