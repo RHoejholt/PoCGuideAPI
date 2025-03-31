@@ -71,7 +71,7 @@ public class Main {
         championDAO.save(championDTO2);
 
         ItemDTO itemDTO1 = new ItemDTO("Trinity Force", "tons of damage");
-        ItemDTO itemDTO2 = new ItemDTO("Infinity edge", "tons of edging");
+        ItemDTO itemDTO2 = new ItemDTO("Infinity edge", "tons of infinity");
         itemDAO.save(itemDTO1);
         itemDAO.save(itemDTO2);
 
