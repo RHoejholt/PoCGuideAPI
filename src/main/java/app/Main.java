@@ -12,6 +12,7 @@ import app.controllers.ChampionController;
 import app.controllers.ItemController;
 import app.persistence.dto.ItemDTO;
 import app.persistence.dto.VoteDTO;
+import app.middleware.AdminAuthMiddleware;
 import io.javalin.Javalin;
 import jakarta.persistence.*;
 
@@ -49,6 +50,19 @@ public class Main {
 
         app.post("/admin/login", adminController::login);
 
+        //Protected Admin Endpoints
+
+        app.post("/champions", championController::createChampion);
+
+        app.put("/champions/{championId}", championController::updateChampion);
+
+        app.delete("/champions/{championId}", championController::deleteChampion);
+
+        app.post("/items", itemController::createItem);
+
+        app.put("/items/{itemId}", itemController::updateItem);
+
+        app.delete("/items/{itemId}", itemController::deleteItem);
     }
 
     private static void populateDataBase(ChampionDAO championDAO, ItemDAO itemDAO, VoteDAO voteDAO) {
