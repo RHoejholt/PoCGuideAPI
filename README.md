@@ -41,7 +41,11 @@ Kopiér
 1. Clone the repository
 2. Create a `config.properties` file in `src/main/resources/` with the following content:
 
-DB_NAME=pathofchampions DB_USERNAME=postgres DB_PASSWORD=your_password
+DB_NAME=pathofchampions 
+
+DB_USERNAME=postgres 
+
+DB_PASSWORD=your_password
 
 markdown
 Kopiér
