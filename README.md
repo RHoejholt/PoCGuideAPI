@@ -4,7 +4,32 @@ Path of Champions Guide API is a RESTful API designed to allow for voting on the
 
 ## Project Structure
 
-src/ ├── main/ │ ├── java/app/ │ │ ├── config/ # Application and Hibernate configuration │ │ ├── controllers/ # REST controllers handling HTTP requests │ │ ├── entities/ # JPA/Hibernate entity classes │ │ ├── exceptions/ # Custom exception classes │ │ ├── middleware/ # Middleware for handling authentication, authorization, and request processing │ │ ├── persistence/ # Persistence layer handling database connections and queries │ │ │ ├── dao/ # Data Access Objects for database operations │ │ │ ├── dto/ # Data Transfer Objects for API requests/responses │ │ └── utils/ # Utility classes │ └── resources/ # Configuration files and resources └── test/ └── java/app/ # Test classes
+src/ 
+
+├── main/ 
+
+│ ├── java/app/ 
+
+│ │ ├── config/ # Application and Hibernate configuration 
+
+│ │ ├── controllers/ # REST controllers handling HTTP requests 
+
+│ │ ├── entities/ # JPA/Hibernate entity classes 
+
+│ │ ├── exceptions/ # Custom exception classes 
+
+│ │ ├── middleware/ # Middleware for handling authentication, authorization, and request processing 
+
+│ │ ├── persistence/ # Persistence layer handling database connections and queries 
+
+│ │ │ ├── dao/ # Data Access Objects for database operations 
+
+│ │ │ ├── dto/ # Data Transfer Objects for API requests/responses 
+
+│ │ └── utils/ # Utility classes 
+
+│ └── resources/ # Configuration files and resources 
+
 
 markdown
 Kopiér
