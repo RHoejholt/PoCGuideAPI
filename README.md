@@ -31,9 +31,6 @@ src/
 │ └── resources/ # Configuration files and resources 
 
 
-markdown
-Kopiér
-
 ## Getting Started
 
 ### Setup
@@ -46,9 +43,6 @@ DB_NAME=pathofchampions
 DB_USERNAME=postgres 
 
 DB_PASSWORD=your_password
-
-markdown
-Kopiér
 
 3. Run `mvn clean install` to build the project
 
