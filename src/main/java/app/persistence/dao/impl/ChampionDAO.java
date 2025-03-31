@@ -1,19 +1,13 @@
 package app.persistence.dao.impl;
 
 import app.persistence.dto.ChampionDTO;
-
 import app.entities.Champion;
 import app.persistence.dao.IDAO;
-import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 
 public class ChampionDAO implements IDAO<ChampionDTO> {
     private static ChampionDAO instance;
@@ -42,7 +36,6 @@ public class ChampionDAO implements IDAO<ChampionDTO> {
     }
 
     public List<ChampionDTO> getChampions() {
-        List<Champion> championList = new ArrayList<>();
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Champion> query = em.createQuery("SELECT p FROM Champion p", Champion.class);
             return ChampionDTO.toDTOList(query.getResultList());
@@ -51,9 +44,9 @@ public class ChampionDAO implements IDAO<ChampionDTO> {
 
     @Override
     public Optional<ChampionDTO> findById(int id) {
-        try (EntityManager em = emf.createEntityManager()){
+        try (EntityManager em = emf.createEntityManager()) {
             Champion champion = em.find(Champion.class, id);
-            if (champion != null){
+            if (champion != null) {
                 return Optional.of(new ChampionDTO(champion));
             }
             return Optional.empty();
@@ -80,7 +73,6 @@ public class ChampionDAO implements IDAO<ChampionDTO> {
             return null;
         }
     }
-
 
     @Override
     public void delete(int id) {

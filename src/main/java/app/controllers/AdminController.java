@@ -1,5 +1,4 @@
 package app.controllers;
-
 import app.config.HibernateConfig;
 import app.persistence.dao.impl.AdminDAO;
 import app.persistence.dao.impl.SecretKeyDAO;
@@ -36,7 +35,6 @@ public class AdminController {
         if (admin.isPresent()) {
             // Retrieve the hashed password from the database
             String storedHashedPassword = admin.get().getPassword();
-
             // Compare the entered password with the stored hashed password
             if (BCrypt.checkpw(credentials.getPassword(), storedHashedPassword)) {
                 String token = JwtUtil.generateToken(admin.get().getEmail());

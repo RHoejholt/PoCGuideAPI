@@ -15,14 +15,14 @@ public class AdminAuthMiddleware implements Handler {
             throw new UnauthorizedResponse("Missing or invalid token");
         }
 
-        token = token.substring(7); // Remove "Bearer " prefix
+        token = token.substring(7);
         DecodedJWT jwt = JwtUtil.validateToken(token);
 
         if (jwt == null || !"admin".equals(jwt.getClaim("role").asString())) {
             throw new UnauthorizedResponse("Unauthorized access");
         }
 
-        ctx.attribute("username", jwt.getSubject()); // Store username in context
+        ctx.attribute("username", jwt.getSubject());
     }
 
     public void handleAdmin(Context ctx) throws Exception {
@@ -32,13 +32,13 @@ public class AdminAuthMiddleware implements Handler {
             throw new UnauthorizedResponse("Missing or invalid token");
         }
 
-        token = token.substring(7); // Remove "Bearer " prefix
+        token = token.substring(7);
         DecodedJWT jwt = JwtUtil.validateToken(token);
 
         if (jwt == null || !"admin".equals(jwt.getClaim("role").asString())) {
             throw new UnauthorizedResponse("Unauthorized access");
         }
 
-        ctx.attribute("username", jwt.getSubject()); // Store username in context
+        ctx.attribute("username", jwt.getSubject());
     }
 }

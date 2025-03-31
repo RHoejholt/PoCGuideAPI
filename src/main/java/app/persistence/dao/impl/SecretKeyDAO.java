@@ -22,7 +22,6 @@ public class SecretKeyDAO {
         return instance;
     }
 
-    // Get all secret keys
     public List<String> getAllSecretKeys() {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<String> query = em.createQuery("SELECT s.secretKey FROM SecretKey s", String.class);
@@ -43,7 +42,6 @@ public class SecretKeyDAO {
         }
     }
 
-    // Save a secret key
     public void save(SecretKey secretKey) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();

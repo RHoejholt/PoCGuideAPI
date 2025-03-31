@@ -6,7 +6,6 @@ import app.persistence.dao.IDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,7 +61,7 @@ public class VoteDAO implements IDAO<VoteDTO> {
             em.getTransaction().begin();
             Vote vote = em.find(Vote.class, voteDTO.getId());
             if (vote != null) {
-                vote.setRating(voteDTO.getRating()); // Correct field name
+                vote.setRating(voteDTO.getRating());
                 em.merge(vote);
                 em.getTransaction().commit();
                 return new VoteDTO(vote);

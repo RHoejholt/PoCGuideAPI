@@ -85,28 +85,6 @@ public class AdminDAO implements IDAO<AdminDTO> {
         return null;
     }
 
-    public List<String> getAllSecretKeys() {
-        try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<String> query = em.createQuery("SELECT a.secretKey FROM Admin a", String.class);
-            return query.getResultList();
-        }
-    }
-
-    // Method to delete a secret key
-    public void deleteSecretKey(String secretKey) {
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            TypedQuery<Admin> query = em.createQuery("SELECT a FROM Admin a WHERE a.secretKey = :secretKey", Admin.class);
-            query.setParameter("secretKey", secretKey);
-            Admin admin = query.getSingleResult();
-            if (admin != null) {
-                em.remove(admin);
-            }
-            em.getTransaction().commit();
-        }
-    }
-
-
     @Override
     public void delete(int id) {
         try (EntityManager em = emf.createEntityManager()) {

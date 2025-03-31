@@ -9,7 +9,6 @@ import app.persistence.dao.impl.VoteDAO;
 import app.persistence.dto.ChampionDTO;
 import app.persistence.dto.ItemDTO;
 import io.javalin.http.Context;
-import io.javalin.http.NotFoundResponse;
 import jakarta.persistence.EntityManagerFactory;
 
 public class ChampionController {
@@ -57,15 +56,11 @@ public class ChampionController {
 
             itemsWithRatings.add(itemData);
         }
-
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("champion", champion);
         response.put("items", itemsWithRatings);
-
         ctx.json(response);
-
     }
-
 
     public void createChampion(Context ctx) throws Exception {
         new AdminAuthMiddleware().handle(ctx); // Protect endpoint

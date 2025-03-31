@@ -12,7 +12,6 @@ import app.controllers.ChampionController;
 import app.controllers.ItemController;
 import app.persistence.dto.ItemDTO;
 import app.persistence.dto.VoteDTO;
-import app.middleware.AdminAuthMiddleware;
 import io.javalin.Javalin;
 import jakarta.persistence.*;
 
