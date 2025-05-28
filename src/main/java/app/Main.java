@@ -74,19 +74,4 @@ public class Main {
 
         app.delete("/items/{itemId}", itemController::deleteItem);
     }
-
-
-
-    private static void saveVotes(VoteDAO voteDAO, VoteDTO vote1, VoteDTO vote2, VoteDTO vote3, VoteDTO vote4, VoteDTO vote5, VoteDTO vote6, VoteDTO vote7, VoteDTO vote8, VoteDTO vote9, VoteDTO vote10) {
-        voteDAO.save(vote1);
-        voteDAO.save(vote2);
-        voteDAO.save(vote3);
-        voteDAO.save(vote4);
-        voteDAO.save(vote5);
-        voteDAO.save(vote6);
-        voteDAO.save(vote7);
-        voteDAO.save(vote8);
-        voteDAO.save(vote9);
-        voteDAO.save(vote10);
-    }
 }

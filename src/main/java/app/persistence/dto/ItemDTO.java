@@ -14,7 +14,7 @@ public class ItemDTO {
     private int id;
     private String name;
     private String description;
-    @JsonIgnore
+   // @JsonIgnore
     private double averageRating;
 
     public ItemDTO(Item item){
@@ -29,13 +29,15 @@ public class ItemDTO {
         this.description = description;
 
     }
-
+/*
     public ItemDTO(int id, String name, String description){
         this.id = id;
         this.name= name;
         this.description = description;
 
     }
+    */
+
 
     public ItemDTO(Item item, double averageRating) {
         this.id = item.getId();

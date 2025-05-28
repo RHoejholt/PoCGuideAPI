@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.util.List;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,22 +16,17 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VoteDTO {
     private int id;
-    private Champion champion;
-    private Item item;
+    private int championId;
+    private int itemId;
     private int rating;
 
     public VoteDTO(Vote vote) {
         this.id = vote.getId();
-        this.champion = vote.getChampion();
-        this.item = vote.getItem();
+        this.championId = vote.getChampion().getId();
+        this.itemId = vote.getItem().getId();
         this.rating = vote.getRating();
     }
 
-    public VoteDTO(Champion champion, Item item, int rating) {
-        this.champion = champion;
-        this.item = item;
-        this.rating = rating;
-    }
 
     public static List<VoteDTO> toDTOList(List<Vote> votes) {
         return votes.stream().map(VoteDTO::new).toList();

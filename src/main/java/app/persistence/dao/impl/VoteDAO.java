@@ -1,5 +1,7 @@
 package app.persistence.dao.impl;
 
+import app.entities.Champion;
+import app.entities.Item;
 import app.persistence.dto.VoteDTO;
 import app.entities.Vote;
 import app.persistence.dao.IDAO;
@@ -26,6 +28,31 @@ public class VoteDAO implements IDAO<VoteDTO> {
 
     @Override
     public VoteDTO save(VoteDTO voteDTO) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            // Fetch managed entities for associations
+            Champion champion = em.find(Champion.class, voteDTO.getChampionId());
+            Item item = em.find(Item.class, voteDTO.getItemId());
+            if (champion == null || item == null) {
+                em.getTransaction().rollback();
+                throw new IllegalArgumentException("Invalid championId or itemId");
+            }
+            // Create and persist vote
+            Vote vote = new Vote();
+            vote.setChampion(champion);
+            vote.setItem(item);
+            vote.setRating(voteDTO.getRating());
+
+            em.persist(vote);
+            em.flush();  // force the INSERT now
+            em.getTransaction().commit();
+            return new VoteDTO(vote);
+        }
+    }
+
+    /*
+    @Override
+    public VoteDTO save(VoteDTO voteDTO) {
         Vote vote = new Vote(voteDTO);
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
@@ -33,7 +60,7 @@ public class VoteDAO implements IDAO<VoteDTO> {
             em.getTransaction().commit();
         }
         return new VoteDTO(vote);
-    }
+    }*/
 
     public List<VoteDTO> getVotes() {
         try (EntityManager em = emf.createEntityManager()) {
@@ -96,7 +123,8 @@ public class VoteDAO implements IDAO<VoteDTO> {
             query.setParameter("itemId", itemId);
             query.setParameter("championId", championId);
             Double result = query.getSingleResult();
-            return result != null ? result : 0;
+
+           return result;
         }
     }
 

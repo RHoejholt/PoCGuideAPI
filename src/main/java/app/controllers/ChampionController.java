@@ -46,8 +46,7 @@ public class ChampionController {
         List<ItemDTO> items = itemDAO.getItemsForChampion(voteDAO, championId);
         List<Map<String, Object>> itemsWithRatings = new ArrayList<>();
         for (ItemDTO item : items) {
-            double averageRating = voteDAO.getAverageRatingForItemAndChampion(championId, item.getId());
-
+            double averageRating = voteDAO.getAverageRatingForItemAndChampion(item.getId(), championId);
             Map<String, Object> itemData = new LinkedHashMap<>();
             itemData.put("id", item.getId());
             itemData.put("name", item.getName());
@@ -56,9 +55,11 @@ public class ChampionController {
 
             itemsWithRatings.add(itemData);
         }
+
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("champion", champion);
         response.put("items", itemsWithRatings);
+
         ctx.json(response);
     }
 
