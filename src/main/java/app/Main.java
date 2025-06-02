@@ -24,6 +24,7 @@ public class Main {
             ctx.header("Access-Control-Allow-Origin", "http://localhost:5173");
             ctx.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             ctx.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            ctx.header("Access-Control-Allow-Credentials", "true");
         });
         app.options("/*", ctx -> {
             ctx.status(204); // No Content

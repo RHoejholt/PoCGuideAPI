@@ -18,6 +18,13 @@ public class AdminDTO {
     private String username;
     private String password;
 
+    public AdminDTO(String email, String username, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+
     public AdminDTO(Admin admin) {
         this.id = admin.getId();
         this.email = admin.getEmail();

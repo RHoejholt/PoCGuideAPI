@@ -3,6 +3,7 @@ package app.persistence;
 import app.persistence.dao.impl.ChampionDAO;
 import app.persistence.dao.impl.ItemDAO;
 import app.persistence.dao.impl.VoteDAO;
+import app.persistence.dto.AdminDTO;
 import app.persistence.dto.ChampionDTO;
 import app.persistence.dto.ItemDTO;
 
@@ -22,7 +23,7 @@ public class Populator {
                 new ChampionDTO("Ekko", "Quick Attack. Play: Predict. Attack: Create a Time Trick in hand."),
                 new ChampionDTO("Elder Dragon", "Overwhelm. When you summon a Dragon, grant it +1|+1."),
                 new ChampionDTO("Elise", "Fearsome. Round Start: Summon a Spiderling."),
-                new ChampionDTO("Fiddlesticks",  "Game Start: Plant me as a  Nightmare deep in the enemy deck. When I'm summoned, grant enemies 2  Gloom."),
+                new ChampionDTO("Fiddlesticks", "Game Start: Plant me as a  Nightmare deep in the enemy deck. When I'm summoned, grant enemies 2  Gloom."),
                 new ChampionDTO("Garen", "Regeneration. Attack: Ready your attack."),
                 new ChampionDTO("Gnar", "Quick Attack. When you damage the enemy Nexus, transform into Mega Gnar."),
                 new ChampionDTO("Illaoi", "Attack: Spawn 1. If your Tentacle has 3+ Power, give me Overwhelm."),
@@ -76,63 +77,62 @@ public class Populator {
         ItemDTO itemDTO9;
         List<ItemDTO> items = List.of(
 
-        new ItemDTO("Arcane Comet", "Round Start: Create a Fleeting 6 Falling Comet in hand."),
+                new ItemDTO("Arcane Comet", "Round Start: Create a Fleeting 6 Falling Comet in hand."),
 
 
-        new ItemDTO("Archangel's Staff", "Round Start: Refill your spell mana."),
+                new ItemDTO("Archangel's Staff", "Round Start: Refill your spell mana."),
 
 
-        new ItemDTO("Armordillo Shell", "+0|+1 and Tough"),
+                new ItemDTO("Armordillo Shell", "+0|+1 and Tough"),
 
 
-        new ItemDTO("Banshee's Veil", "Spellshield"),
+                new ItemDTO("Banshee's Veil", "Spellshield"),
 
 
-        new ItemDTO("Big Guns", "Power: Your spells and skills deal 1 extra damage."),
+                new ItemDTO("Big Guns", "Power: Your spells and skills deal 1 extra damage."),
 
 
-        new ItemDTO("Black Shield", "Power: When you summon an ally, grant it SpellShield."),
+                new ItemDTO("Black Shield", "Power: When you summon an ally, grant it SpellShield."),
 
 
-        new ItemDTO("Caulfield's Warhammer", "+2|+1"),
+                new ItemDTO("Caulfield's Warhammer", "+2|+1"),
 
 
-        new ItemDTO("Cease and Desist", "3 Impact. Play: If I have 10+ Power, give me Barrier and start a free attack Challenging the strongest enemy."),
+                new ItemDTO("Cease and Desist", "3 Impact. Play: If I have 10+ Power, give me Barrier and start a free attack Challenging the strongest enemy."),
 
 
-        new ItemDTO("Chosen by the Stars", "Fated, Augment, Empowered 10: Overwhelm, Regeneration, and Challenger."),
+                new ItemDTO("Chosen by the Stars", "Fated, Augment, Empowered 10: Overwhelm, Regeneration, and Challenger."),
 
 
-
-        new ItemDTO("Chemtech Duplicator", "When you play a spell, if you have 6+ mana gems, copy it with the same targets."),
-
-
-        new ItemDTO("Condenser", "Support: Create a 1 cost 1|1 copy of my supported ally in hand."),
+                new ItemDTO("Chemtech Duplicator", "When you play a spell, if you have 6+ mana gems, copy it with the same targets."),
 
 
-        new ItemDTO("Corrupted Star Fragment", "Support: Kill my supported ally and grant me its keyword and stats."),
+                new ItemDTO("Condenser", "Support: Create a 1 cost 1|1 copy of my supported ally in hand."),
 
 
-       // new ItemDTO("Cosmic Blessing", "+1|+1. Quest: Win an Adventure. Reward: Gain 5x the normal Champion XP."),
+                new ItemDTO("Corrupted Star Fragment", "Support: Kill my supported ally and grant me its keyword and stats."),
 
 
-       // new ItemDTO("Cosmic Pearl", "+1 Starting Mana. Quest: Win an Adventure. Reward: Gain 5x the normal Champion XP."),
+                // new ItemDTO("Cosmic Blessing", "+1|+1. Quest: Win an Adventure. Reward: Gain 5x the normal Champion XP."),
 
 
-        new ItemDTO("The Curator's Gatebreaker", "-1|-0. Play: I strike the enemy Nexus."),
+                // new ItemDTO("Cosmic Pearl", "+1 Starting Mana. Quest: Win an Adventure. Reward: Gain 5x the normal Champion XP."),
 
 
-        new ItemDTO("Defense Spending", "Power: Your Nexus has Tough. I am Tech."),
+                new ItemDTO("The Curator's Gatebreaker", "-1|-0. Play: I strike the enemy Nexus."),
 
 
-        new ItemDTO("Death's Foil", "+1|+0. While I'm attacking, I can't take damage or die."),
+                new ItemDTO("Defense Spending", "Power: Your Nexus has Tough. I am Tech."),
 
 
-        new ItemDTO("Deadly Harpoon", "+2|+0 and Challenger. Power: Game Start: Shuffle two 5 Deaths From Below into your deck and grant 5 Deaths From Below a random epic item."),
+                new ItemDTO("Death's Foil", "+1|+0. While I'm attacking, I can't take damage or die."),
 
 
-        new ItemDTO("The Deceiver's Crest", "When I level up, create a copy of my champion spell in hand. It costs 0 this round. It will become a regular champion card once the champion leaves the board."),
-        new ItemDTO("Disciple of Shadows", "I cost 1 less for each ally in play. Play: Deal 3 to all other allies."),
+                new ItemDTO("Deadly Harpoon", "+2|+0 and Challenger. Power: Game Start: Shuffle two 5 Deaths From Below into your deck and grant 5 Deaths From Below a random epic item."),
+
+
+                new ItemDTO("The Deceiver's Crest", "When I level up, create a copy of my champion spell in hand. It costs 0 this round. It will become a regular champion card once the champion leaves the board."),
+                new ItemDTO("Disciple of Shadows", "I cost 1 less for each ally in play. Play: Deal 3 to all other allies."),
                 new ItemDTO("Cruel Experiments", "Power: When you play an ally with 2+ Health, deal 1 to it and grant it Overwhelm and Impact."),
                 new ItemDTO("Dreadway Chase Gun", "When I'm summoned, create a Dreadway in hand."),
                 new ItemDTO("Dreams of Yordles", "Game Start: Create 3 random Yordles in hand."),
@@ -145,8 +145,8 @@ public class Populator {
                 new ItemDTO("Full Build", "Challenger, Tough, and Overwhelm."),
                 new ItemDTO("Galeforce", "When I'm summoned, Rally."),
                 new ItemDTO("Golden Spatula", "When you summon an ally, grant it a random keyword."),
-              //  new ItemDTO("Greater Cosmic Blessing", "+2|+2. Quest: Win an Adventure. Reward: Gain 10x the normal Champion XP."),
-               // new ItemDTO("Greater Cosmic Pearl", "+1 Starting Mana. Quest: Win an Adventure. Reward: Gain 10x the normal Champion XP."),
+                //  new ItemDTO("Greater Cosmic Blessing", "+2|+2. Quest: Win an Adventure. Reward: Gain 10x the normal Champion XP."),
+                // new ItemDTO("Greater Cosmic Pearl", "+1 Starting Mana. Quest: Win an Adventure. Reward: Gain 10x the normal Champion XP."),
                 new ItemDTO("Greenglade Shadeleaf", "When I'm summoned, give me Elusive this round."),
                 new ItemDTO("Guardian Angel", "Start adventures with +1 Revive."),
                 new ItemDTO("Guardian's Orb", "When I'm summoned, grant me Barrier."),
@@ -170,7 +170,7 @@ public class Populator {
                 new ItemDTO("Oath of the Guardians", "When I'm summoned, grant me Tough."),
                 new ItemDTO("Packed Powder", "When I'm summoned, deal 1 to all enemies."),
                 new ItemDTO("Portal Pals", "When I'm summoned, create 2 random 7+ cost units from your regions and reduce their cost by my base cost."),
-              //  new ItemDTO("Quest for Wisdom", "When I'm summoned, draw 1 and give it Fleeting."),
+                //  new ItemDTO("Quest for Wisdom", "When I'm summoned, draw 1 and give it Fleeting."),
                 new ItemDTO("Ravenous Hydra", "When I'm summoned, deal 1 to all enemies."),
                 new ItemDTO("Riptide Battery", "When I'm summoned, deal 1 to all enemies."),
                 new ItemDTO("Scales of Judgment", "Power: When you play a champion, it strikes the weakest enemy. If it's Nasus, it also strikes the strongest enemy."),
@@ -187,49 +187,50 @@ public class Populator {
                 new ItemDTO("Warmog's Armor", "Regeneration."),
                 new ItemDTO("Crownguard Inheritance", "When I level up, Rally."),
 
-        new ItemDTO("Soul Spear", "+1|+0 and Fearsome."),
+                new ItemDTO("Soul Spear", "+1|+0 and Fearsome."),
 
-        new ItemDTO("Stalker's Blade", "When I'm summoned, I strike the weakest enemy."),
+                new ItemDTO("Stalker's Blade", "When I'm summoned, I strike the weakest enemy."),
 
-        new ItemDTO("Star Gem", "Allied champions have +1|+1 and cost 2 less."),
+                new ItemDTO("Star Gem", "Allied champions have +1|+1 and cost 2 less."),
 
-        new ItemDTO("Stormrazor", "Quick Attack."),
+                new ItemDTO("Stormrazor", "Quick Attack."),
 
-        new ItemDTO("Succubus's Brand", "+1|+1 and when I kill a unit, summon a random Husk."),
+                new ItemDTO("Succubus's Brand", "+1|+1 and when I kill a unit, summon a random Husk."),
 
-        new ItemDTO("The Berserker's Buckle", "When I survive damage, grant me +2|+2."),
+                new ItemDTO("The Berserker's Buckle", "When I survive damage, grant me +2|+2."),
 
-        new ItemDTO("The Bounty Hunter's Renown", "I have +1|+1 for every 200 Gold you have."),
+                new ItemDTO("The Bounty Hunter's Renown", "I have +1|+1 for every 200 Gold you have."),
 
-        new ItemDTO("The Card Master's Gambit", "+1|+1 and when you win an encounter without taking any Nexus damage, earn 1 Reroll."),
+                new ItemDTO("The Card Master's Gambit", "+1|+1 and when you win an encounter without taking any Nexus damage, earn 1 Reroll."),
 
-        new ItemDTO("The Chameleons Necklace", "Game Start: Create 2 copies of me in your deck."),
+                new ItemDTO("The Chameleons Necklace", "Game Start: Create 2 copies of me in your deck."),
 
-        new ItemDTO("The Collector", "+1|+1 and when I kill an enemy, you earn 50 Gold. (Max 2 kills per encounter)"),
+                new ItemDTO("The Collector", "+1|+1 and when I kill an enemy, you earn 50 Gold. (Max 2 kills per encounter)"),
 
-        new ItemDTO("The Loose Cannon's Payload", "When I'm summoned, discard your hand then create that many 2|2 Pow-Pows in hand."),
+                new ItemDTO("The Loose Cannon's Payload", "When I'm summoned, discard your hand then create that many 2|2 Pow-Pows in hand."),
 
-        new ItemDTO("Transmogulator", "Support: Transform my supported ally into a random follower that costs 3 more."),
+                new ItemDTO("Transmogulator", "Support: Transform my supported ally into a random follower that costs 3 more."),
 
-        new ItemDTO("Troll King's Crown", "Allies have Overwhelm."),
+                new ItemDTO("Troll King's Crown", "Allies have Overwhelm."),
 
-        new ItemDTO("True Ice Flail", "When I'm summoned, give enemies Vulnerable this round."),
+                new ItemDTO("True Ice Flail", "When I'm summoned, give enemies Vulnerable this round."),
 
-        new ItemDTO("Turret Plating", "Your Nexus has Tough."),
+                new ItemDTO("Turret Plating", "Your Nexus has Tough."),
 
-        new ItemDTO("Utmost Despair", "Play: Grant enemies Gloom."),
+                new ItemDTO("Utmost Despair", "Play: Grant enemies Gloom."),
 
-        new ItemDTO("Voidborne Carapace", "Evolve: When ANY unit dies, grant me its keywords."),
+                new ItemDTO("Voidborne Carapace", "Evolve: When ANY unit dies, grant me its keywords."),
 
-        new ItemDTO("Wicked Harvest", "Play: Deal 3 to all other units."),
+                new ItemDTO("Wicked Harvest", "Play: Deal 3 to all other units."),
 
-        new ItemDTO("Wriggle's Lantern", "Round End: Grant me Impact twice if I'm in hand (max Impact 10)."),
+                new ItemDTO("Wriggle's Lantern", "Round End: Grant me Impact twice if I'm in hand (max Impact 10)."),
                 new ItemDTO("Z-Drive Prototype", "Start adventures with +2 Rerolls."));
 
         for (ItemDTO item : items) {
             itemDAO.save(item);
         }
 
+                new AdminDTO("admin", "admin", "admin");
 
     }
 }
